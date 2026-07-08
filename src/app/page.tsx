@@ -52,6 +52,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider eyebrow="навигация" title="Выбирай быстрее" text="Разделы, подборки и сценарии покупки собраны так, чтобы человек сразу понимал, куда нажать." />
+
       <section className="section compactSection" id="catalog">
         <div className="container">
           <div className="sectionHead">
@@ -108,6 +110,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider eyebrow="витрина" title="Комбинированная сетка товаров" text="В каталоге теперь есть маленькие карточки, широкие акценты и крупные товарные блоки — так страница выглядит живее и дороже." strong />
+
       <section className="section compactSection" id="products">
         <div className="container">
           <div className="sectionHead">
@@ -120,6 +124,8 @@ export default function HomePage() {
           <ProductSearch />
         </div>
       </section>
+
+      <SectionDivider eyebrow="контент" title="Обзоры и бренды" text="Видео, распаковки и брендовые витрины помогают покупателю быстрее доверять товару." />
 
       <section className="section compactSection" id="videos">
         <div className="container">
@@ -151,6 +157,8 @@ export default function HomePage() {
         </div>
       </section>
 
+      <SectionDivider eyebrow="подборки" title="Товарные сценарии" text="Горизонтальные полки работают как витрины внутри маркетплейса: новинки, акции, подарки, уход, дом и питомцы." />
+
       {collections.map((collection) => {
         const list = products.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
         return (
@@ -165,7 +173,7 @@ export default function HomePage() {
                 <a className="sectionLink" href="#products">Все товары</a>
               </div>
               <div className="productRail">
-                {list.map((product) => <ProductCard product={product} key={`${collection.title}-${product.id}`} />)}
+                {list.map((product, index) => <ProductCard product={product} featured={index === 0} key={`${collection.title}-${product.id}`} />)}
               </div>
             </div>
           </section>
@@ -197,9 +205,25 @@ export default function HomePage() {
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
+function SectionDivider({ eyebrow, title, text, strong }: { eyebrow: string; title: string; text: string; strong?: boolean }) {
   return (
-    <article className="productCard compactCard">
+    <div className={strong ? 'sectionDivider strongDivider' : 'sectionDivider'}>
+      <div className="container dividerInner">
+        <div className="dividerLine" />
+        <div className="dividerContent">
+          <p>{eyebrow}</p>
+          <h3>{title}</h3>
+          <span>{text}</span>
+        </div>
+        <div className="dividerLine" />
+      </div>
+    </div>
+  );
+}
+
+function ProductCard({ product, featured }: { product: Product; featured?: boolean }) {
+  return (
+    <article className={featured ? 'productCard railFeaturedCard' : 'productCard compactCard'}>
       <a className="productImage" href={`/kaskada/products/${product.id}/`}>
         <img src={product.image} alt={product.name} />
         <span className="badge">{product.badge}</span>
