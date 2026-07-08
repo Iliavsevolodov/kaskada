@@ -1,17 +1,24 @@
-import { HiBolt, HiFire, HiHeart, HiHome, HiMagnifyingGlass, HiOutlineBuildingStorefront, HiOutlineShieldCheck, HiOutlineShoppingBag, HiOutlineTruck, HiSparkles, HiUserCircle } from 'react-icons/hi2';
+import { HiBolt, HiChartBar, HiFire, HiHeart, HiHome, HiMagnifyingGlass, HiOutlineBuildingStorefront, HiOutlineShieldCheck, HiOutlineShoppingBag, HiOutlineTruck, HiSparkles, HiUserCircle } from 'react-icons/hi2';
+import { AccentColorPicker } from '@/components/AccentColorPicker';
 import { HeroSlider } from '@/components/HeroSlider';
+import { ProductPreviewSlider } from '@/components/ProductPreviewSlider';
 import { ProductSearch } from '@/components/ProductSearch';
 import { StoryViewer } from '@/components/StoryViewer';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { getAlgorithmShelves, rankProducts, type RankedProduct } from '@/lib/algorithms';
 import { brands, categories, collections, heroSlides, products, stories, videos } from '@/lib/store';
 
 type Product = (typeof products)[number];
 type Brand = (typeof brands)[number];
+type ProductLike = Product | RankedProduct;
+
+const algorithmShelves = getAlgorithmShelves();
+const topProducts = rankProducts(products, 'popular', 8);
 
 export default function HomePage() {
   return (
     <main className="page">
-      <div className="topNotice">Сегодня: горячие подборки, новые бренды и товары для дома в одной витрине</div>
+      <div className="topNotice">Сегодня: алгоритмические подборки, новые бренды и товары для дома в одной витрине</div>
       <header className="header">
         <div className="container headerInner">
           <a className="logo" href="/kaskada/">
@@ -25,10 +32,11 @@ export default function HomePage() {
           <nav className="nav">
             <a href="#catalog">Каталог</a>
             <a href="#products">Товары</a>
-            <a href="#videos">Обзоры</a>
+            <a href="#algorithm">Алгоритмы</a>
             <a href="#brands">Бренды</a>
           </nav>
           <div className="headerActions">
+            <AccentColorPicker />
             <ThemeToggle />
             <a className="cartBtn" href="#cart"><HiOutlineShoppingBag />Корзина</a>
           </div>
@@ -49,6 +57,22 @@ export default function HomePage() {
           <div><HiOutlineShieldCheck /><span>Заказ</span><strong>под защитой</strong></div>
           <div><HiSparkles /><span>Бренды</span><strong>локальные витрины</strong></div>
           <div><HiBolt /><span>Покупка</span><strong>быстрые действия</strong></div>
+        </div>
+      </section>
+
+      <section className="section algorithmHero" id="algorithm">
+        <div className="container algorithmHeroGrid">
+          <div className="algorithmHeroCard">
+            <p className="label"><HiChartBar /> алгоритмы без ИИ</p>
+            <h2>Показы управляются баллами, а не случайностью</h2>
+            <p>Каждый товар получает рейтинг по кликам, корзинам, заказам, скидке, новизне, отзывам и качеству продавца. Новинки получают шанс, хиты растут, слабые товары опускаются ниже.</p>
+          </div>
+          <div className="algorithmStatsGrid">
+            <div><span>{products.length}</span><p>товаров в ранжировании</p></div>
+            <div><span>10</span><p>сигналов показа</p></div>
+            <div><span>{algorithmShelves.length}</span><p>авто-подборки</p></div>
+            <div><span>24/7</span><p>логика витрины</p></div>
+          </div>
         </div>
       </section>
 
@@ -81,10 +105,10 @@ export default function HomePage() {
             <h3>Локальные витрины с характером</h3>
             <span>Перейти к брендам</span>
           </a>
-          <a className="dealCard" href="#videos">
-            <p><HiSparkles /> обзоры</p>
-            <h3>Распаковки, которые продают товар</h3>
-            <span>Смотреть видео</span>
+          <a className="dealCard" href="#algorithm">
+            <p><HiChartBar /> алгоритм</p>
+            <h3>Продвижение по понятным правилам</h3>
+            <span>Смотреть логику</span>
           </a>
         </div>
       </section>
@@ -110,7 +134,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SectionDivider eyebrow="витрина" title="Комбинированная сетка товаров" text="В каталоге теперь есть маленькие карточки, широкие акценты и крупные товарные блоки — так страница выглядит живее и дороже." strong />
+      <SectionDivider eyebrow="витрина" title="Алгоритмическая выдача" text="Каталог теперь сортируется по баллам: спрос, клики, корзины, рейтинг, новизна, скидка и качество продавца." strong />
 
       <section className="section compactSection" id="products">
         <div className="container">
@@ -118,12 +142,48 @@ export default function HomePage() {
             <div>
               <p className="label">товары</p>
               <h2 className="sectionTitle">Маркетплейс-витрина</h2>
-              <p className="sectionText">Поиск, фильтры, рейтинг, бренды и быстрые действия в плотной товарной сетке.</p>
+              <p className="sectionText">Поиск, фильтры, рейтинг, бренды, алгоритмические баллы и быстрые действия в плотной товарной сетке.</p>
             </div>
           </div>
           <ProductSearch />
         </div>
       </section>
+
+      <section className="section compactSection">
+        <div className="container">
+          <div className="sectionHead">
+            <div>
+              <p className="label">топ алгоритма</p>
+              <h2 className="sectionTitle">Лучшие позиции выдачи</h2>
+              <p className="sectionText">Эти товары сейчас получают больше показов по rule-based формуле.</p>
+            </div>
+            <a className="sectionLink" href="#products">В каталог</a>
+          </div>
+          <div className="productRail algorithmRail">
+            {topProducts.map((product, index) => <ProductCard product={product} featured={index === 0} key={`top-${product.id}`} />)}
+          </div>
+        </div>
+      </section>
+
+      <SectionDivider eyebrow="авто-подборки" title="Блоки собираются сами" text="Популярное, новинки, выгодные товары и высокий рейтинг — это не ручная витрина, а сортировка по правилам." />
+
+      {algorithmShelves.map((shelf) => (
+        <section className="section compactSection algorithmShelf" id={shelf.id} key={shelf.id}>
+          <div className="container">
+            <div className="sectionHead">
+              <div>
+                <p className="label">{shelf.eyebrow}</p>
+                <h2 className="sectionTitle">{shelf.title}</h2>
+                <p className="sectionText">{shelf.text}</p>
+              </div>
+              <a className="sectionLink" href="#products">Все товары</a>
+            </div>
+            <div className="productRail algorithmRail">
+              {shelf.products.map((product, index) => <ProductCard product={product} featured={index === 0} key={`${shelf.id}-${product.id}`} />)}
+            </div>
+          </div>
+        </section>
+      ))}
 
       <SectionDivider eyebrow="контент" title="Обзоры и бренды" text="Видео, распаковки и брендовые витрины помогают покупателю быстрее доверять товару." />
 
@@ -157,7 +217,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <SectionDivider eyebrow="подборки" title="Товарные сценарии" text="Горизонтальные полки работают как витрины внутри маркетплейса: новинки, акции, подарки, уход, дом и питомцы." />
+      <SectionDivider eyebrow="ручные полки" title="Товарные сценарии" text="Горизонтальные полки остаются как витрины внутри маркетплейса: новинки, акции, подарки, уход, дом и питомцы." />
 
       {collections.map((collection) => {
         const list = products.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
@@ -221,16 +281,18 @@ function SectionDivider({ eyebrow, title, text, strong }: { eyebrow: string; tit
   );
 }
 
-function ProductCard({ product, featured }: { product: Product; featured?: boolean }) {
+function ProductCard({ product, featured }: { product: ProductLike; featured?: boolean }) {
+  const badge = 'promotionLabel' in product ? product.promotionLabel : product.badge;
+  const algorithmReason = 'algorithmReason' in product ? product.algorithmReason : null;
+  const algorithmScore = 'algorithmScore' in product ? product.algorithmScore : null;
+
   return (
     <article className={featured ? 'productCard railFeaturedCard' : 'productCard compactCard'}>
-      <a className="productImage" href={`/kaskada/products/${product.id}/`}>
-        <img src={product.image} alt={product.name} />
-        <span className="badge">{product.badge}</span>
-      </a>
+      <ProductPreviewSlider href={`/kaskada/products/${product.id}/`} image={product.image} title={product.name} category={product.category} badge={badge} />
       <div className="productBody">
         <a href={`/kaskada/products/${product.id}/`}><h3 className="productName">{product.name}</h3></a>
         <div className="productMeta"><span>{product.brand}</span><span>★ {product.rating}</span></div>
+        {algorithmReason ? <div className="algorithmTag"><span>{algorithmReason}</span><strong>{algorithmScore}</strong></div> : null}
         <div className="priceRow">
           <p className="price">{product.price}</p>
           <p className="oldPrice">{product.oldPrice}</p>
