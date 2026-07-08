@@ -1,0 +1,318 @@
+/* Feature layer: algorithms, color accents, product preview sliders */
+html[data-accent='coral'] {
+  --accent: #ff4f40;
+  --accent-2: #ff8a3d;
+  --gold: #ffd34d;
+}
+html[data-accent='violet'] {
+  --accent: #7c3cff;
+  --accent-2: #c353ff;
+  --gold: #ffcf5b;
+}
+html[data-accent='emerald'] {
+  --accent: #0f9f6e;
+  --accent-2: #4ccf83;
+  --gold: #f8c94a;
+}
+html[data-accent='blue'] {
+  --accent: #1977ff;
+  --accent-2: #20c7ff;
+  --gold: #ffd34d;
+}
+html[data-accent='gold'] {
+  --accent: #c98312;
+  --accent-2: #f4b93f;
+  --gold: #ffe07a;
+}
+
+.accentPicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 36px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  padding: 0 8px;
+}
+
+.accentDot {
+  width: 18px;
+  height: 18px;
+  border: 2px solid color-mix(in srgb, var(--surface) 80%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+
+.accentDot.coral { background: linear-gradient(135deg, #ff4f40, #ff8a3d); }
+.accentDot.violet { background: linear-gradient(135deg, #7c3cff, #c353ff); }
+.accentDot.emerald { background: linear-gradient(135deg, #0f9f6e, #4ccf83); }
+.accentDot.blue { background: linear-gradient(135deg, #1977ff, #20c7ff); }
+.accentDot.gold { background: linear-gradient(135deg, #c98312, #ffe07a); }
+.activeAccentDot {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.algorithmHero {
+  padding: 18px 0 12px;
+}
+.algorithmHeroGrid {
+  display: grid;
+  grid-template-columns: 1.35fr .9fr;
+  gap: 14px;
+  align-items: stretch;
+}
+.algorithmHeroCard,
+.algorithmStatsGrid div {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 85% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 34%),
+    linear-gradient(135deg, var(--surface), var(--soft));
+  box-shadow: var(--shadow);
+}
+.algorithmHeroCard {
+  padding: 26px;
+}
+.algorithmHeroCard .label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.algorithmHeroCard h2 {
+  max-width: 720px;
+  margin: 10px 0 0;
+  font-size: clamp(32px, 5vw, 56px);
+  line-height: .94;
+  letter-spacing: -.055em;
+}
+.algorithmHeroCard p:last-child {
+  max-width: 650px;
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.algorithmStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+.algorithmStatsGrid div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px;
+}
+.algorithmStatsGrid span {
+  color: var(--accent);
+  font-size: 34px;
+  line-height: .9;
+  font-weight: 950;
+  letter-spacing: -.05em;
+}
+.algorithmStatsGrid p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.25;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+
+.algorithmShelf:nth-of-type(odd) .sectionHead {
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--soft) 66%, transparent);
+  padding: 14px;
+}
+.algorithmRail .productCard {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
+}
+.algorithmTag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  min-width: 0;
+  margin-top: 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
+  border-radius: var(--radius-sm);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+  padding: 6px 8px;
+}
+.algorithmTag span {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  line-height: 1.1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.algorithmTag strong {
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.productPreview {
+  position: relative;
+  isolation: isolate;
+}
+.previewImageLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: inherit;
+}
+.previewTrack {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1);
+  will-change: transform;
+}
+.previewTrack img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.previewArrow {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 34px;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 999px;
+  background: rgba(17,19,24,.38);
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-50%);
+  transition: opacity .2s ease, background .2s ease;
+  backdrop-filter: blur(8px);
+}
+.previewArrowLeft { left: 10px; }
+.previewArrowRight { right: 10px; }
+.productCard:hover .previewArrow,
+.productPreview:focus-within .previewArrow {
+  opacity: 1;
+}
+.previewArrow:hover {
+  background: rgba(17,19,24,.62);
+}
+.previewDots {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  z-index: 3;
+  display: flex;
+  gap: 4px;
+  transform: translateX(-50%);
+}
+.previewDot {
+  display: block;
+  width: 18px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.55);
+}
+.activePreviewDot {
+  background: var(--gold);
+}
+
+.productCard {
+  contain: layout paint;
+}
+.productGrid,
+.productRail {
+  overflow-anchor: none;
+}
+.mixedProductGrid .productCard {
+  min-height: 100%;
+}
+.featuredCard,
+.wideCard,
+.tallCard {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .algorithmHeroGrid {
+    grid-template-columns: 1fr;
+  }
+  .algorithmHeroCard {
+    padding: 22px;
+  }
+  .algorithmStatsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .accentPicker {
+    max-width: 104px;
+    gap: 4px;
+    padding: 0 6px;
+  }
+  .accentDot {
+    width: 14px;
+    height: 14px;
+  }
+  .algorithmHeroGrid {
+    gap: 10px;
+  }
+  .algorithmHeroCard {
+    border-radius: var(--radius-lg);
+    padding: 18px;
+  }
+  .algorithmHeroCard h2 {
+    font-size: 32px;
+  }
+  .algorithmHeroCard p:last-child {
+    font-size: 13px;
+  }
+  .algorithmStatsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .algorithmStatsGrid div {
+    border-radius: var(--radius-lg);
+    padding: 14px;
+  }
+  .algorithmStatsGrid span {
+    font-size: 27px;
+  }
+  .algorithmStatsGrid p {
+    font-size: 9px;
+  }
+  .algorithmTag {
+    padding: 5px 6px;
+  }
+  .algorithmTag span {
+    font-size: 8.5px;
+  }
+  .algorithmTag strong {
+    font-size: 9px;
+  }
+  .previewArrow {
+    display: none;
+  }
+  .previewDots {
+    bottom: 7px;
+  }
+  .previewDot {
+    width: 13px;
+  }
+}
