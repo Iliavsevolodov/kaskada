@@ -1,3 +1,4 @@
+import { ProductSearch } from '@/components/ProductSearch';
 import { brands, categories, collections, heroSlides, products, stories, videos } from '@/lib/store';
 
 type Product = (typeof products)[number];
@@ -32,7 +33,7 @@ export default function HomePage() {
               <img className="heroImage" src={slide.image} alt={slide.title} />
               <div className="heroOverlay" />
               <div className="heroContent">
-                <p className="label">тёплая витрина</p>
+                <p className="label">яркая витрина</p>
                 <h1>{slide.title}</h1>
                 <p>{slide.text}</p>
                 <div className="heroActions">
@@ -53,17 +54,6 @@ export default function HomePage() {
               <span className="storyTitle">{story.title}</span>
             </a>
           ))}
-        </div>
-      </section>
-
-      <section className="searchBlock" id="search">
-        <div className="container">
-          <div className="searchBox">
-            <input placeholder="Найти товар, бренд или категорию" />
-            <div className="searchHints">
-              {['крем', 'дом', 'подарок', 'чай', 'свеча', 'детям'].map((item) => <a href="#products" key={item}>{item}</a>)}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -91,7 +81,7 @@ export default function HomePage() {
               <p>Наборы, уход и уютные мелочи для красивого повода.</p>
             </div>
           </a>
-          <a className="promoBanner" href="#home">
+          <a className="promoBanner promoBannerBright" href="#home">
             <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80" alt="Дом" />
             <div className="promoContent">
               <p className="label">дом и уют</p>
@@ -107,13 +97,11 @@ export default function HomePage() {
           <div className="sectionHead">
             <div>
               <p className="label">товары</p>
-              <h2 className="sectionTitle">Популярное сейчас</h2>
+              <h2 className="sectionTitle">Найди и добавь в корзину</h2>
+              <p className="sectionText">Поиск работает по названию, бренду, категории, описанию и бейджам.</p>
             </div>
-            <a className="category" href="#catalog">Все категории</a>
           </div>
-          <div className="productGrid">
-            {products.slice(0, 8).map((product) => <ProductCard product={product} key={product.id} />)}
-          </div>
+          <ProductSearch />
         </div>
       </section>
 
@@ -149,7 +137,7 @@ export default function HomePage() {
       {collections.map((collection) => {
         const list = products.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
         return (
-          <section className="section" id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : undefined} key={collection.title}>
+          <section className="section" id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : collection.title === 'Для ухода' ? 'beauty' : undefined} key={collection.title}>
             <div className="container">
               <div className="sectionHead">
                 <div>
