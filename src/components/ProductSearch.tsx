@@ -6,6 +6,13 @@ import { products } from '@/lib/store';
 
 type Product = (typeof products)[number];
 
+function getCardSize(index: number) {
+  if (index === 0) return 'featuredCard';
+  if (index > 0 && index % 11 === 0) return 'wideCard';
+  if (index > 0 && index % 7 === 0) return 'tallCard';
+  return 'compactCard';
+}
+
 export function ProductSearch() {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('Все');
@@ -37,16 +44,16 @@ export function ProductSearch() {
         <p>{items.length} товаров</p>
         {(query || filter !== 'Все') ? <button onClick={() => { setQuery(''); setFilter('Все'); }} type="button">Сбросить</button> : null}
       </div>
-      <div className="productGrid compactGrid">
-        {items.map((product) => <SearchProductCard product={product} key={product.id} />)}
+      <div className="productGrid mixedProductGrid">
+        {items.map((product, index) => <SearchProductCard product={product} size={getCardSize(index)} key={product.id} />)}
       </div>
     </div>
   );
 }
 
-function SearchProductCard({ product }: { product: Product }) {
+function SearchProductCard({ product, size }: { product: Product; size: string }) {
   return (
-    <article className="productCard compactCard">
+    <article className={`productCard ${size}`}>
       <a className="productImage" href={`/kaskada/products/${product.id}/`}>
         <img src={product.image} alt={product.name} />
         <span className="badge">{product.badge}</span>
