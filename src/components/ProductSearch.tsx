@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import { HiHeart, HiMagnifyingGlass, HiOutlineShoppingBag, HiXMark } from 'react-icons/hi2';
 import { ProductPreviewSlider } from '@/components/ProductPreviewSlider';
 import { rankProducts, type RankedProduct } from '@/lib/algorithms';
-import { products } from '@/lib/store';
+import { marketProducts } from '@/lib/catalog';
 
 function getCardSize(index: number) {
   if (index === 0) return 'featuredCard';
@@ -19,12 +19,13 @@ export function ProductSearch() {
 
   const items = useMemo(() => {
     const text = query.trim().toLowerCase();
-    const filtered = products.filter((product) => {
-      const byFilter = filter === 'Все' || product.category === filter || product.badge === filter;
+    const context = filter === 'Май' ? 'may' : filter === 'Новинка' ? 'new' : filter === 'Акция' ? 'sale' : 'default';
+    const filtered = marketProducts.filter((product) => {
+      const byFilter = filter === 'Все' || filter === 'Май' || product.category === filter || product.badge === filter;
       const byText = !text || [product.name, product.brand, product.category, product.badge, product.description].join(' ').toLowerCase().includes(text);
       return byFilter && byText;
     });
-    return rankProducts(filtered, filter === 'Новинка' ? 'new' : filter === 'Акция' ? 'sale' : 'default');
+    return rankProducts(filtered, context);
   }, [query, filter]);
 
   return (
@@ -36,13 +37,13 @@ export function ProductSearch() {
           {query ? <button className="clearSearch" onClick={() => setQuery('')} type="button" aria-label="Очистить поиск"><HiXMark /></button> : null}
         </div>
         <div className="searchHints">
-          {['Все', 'Новинка', 'Акция', 'Дом', 'Уход', 'Подарок', 'Чай', 'Питомцам'].map((item) => (
+          {['Все', 'Май', 'Новинка', 'Акция', 'Дом', 'Уход', 'Подарок', 'Чай', 'Питомцам'].map((item) => (
             <button className={filter === item ? 'hintActive' : ''} key={item} onClick={() => setFilter(item)} type="button">{item}</button>
           ))}
         </div>
       </div>
       <div className="searchMeta">
-        <p>{items.length} товаров · сортировка по алгоритму показов</p>
+        <p>{items.length} товаров · алгоритм показов активен</p>
         {(query || filter !== 'Все') ? <button onClick={() => { setQuery(''); setFilter('Все'); }} type="button">Сбросить</button> : null}
       </div>
       <div className="productGrid mixedProductGrid">
@@ -55,7 +56,7 @@ export function ProductSearch() {
 function SearchProductCard({ product, size }: { product: RankedProduct; size: string }) {
   return (
     <article className={`productCard ${size}`}>
-      <ProductPreviewSlider href={`/kaskada/products/${product.id}/`} image={product.image} title={product.name} category={product.category} badge={product.promotionLabel} />
+      <ProductPreviewSlider href={`/kaskada/products/${product.id}/`} image={product.image} title={product.name} category={product.category} badge={product.promotionLabel} gallery={product.gallery} />
       <div className="productBody">
         <a href={`/kaskada/products/${product.id}/`}><h3 className="productName">{product.name}</h3></a>
         <div className="productMeta"><span>{product.brand}</span><span>★ {product.rating}</span></div>
