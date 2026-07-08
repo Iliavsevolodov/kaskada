@@ -1,3 +1,5 @@
+import { HiHeart, HiOutlineBuildingStorefront, HiOutlineShoppingBag } from 'react-icons/hi2';
+import { HeroSlider } from '@/components/HeroSlider';
 import { ProductSearch } from '@/components/ProductSearch';
 import { brands, categories, collections, heroSlides, products, stories, videos } from '@/lib/store';
 
@@ -22,29 +24,11 @@ export default function HomePage() {
             <a href="#videos">Обзоры</a>
             <a href="#brands">Бренды</a>
           </nav>
-          <a className="cartBtn" href="#cart">Корзина</a>
+          <a className="cartBtn" href="#cart"><HiOutlineShoppingBag />Корзина</a>
         </div>
       </header>
 
-      <section className="hero">
-        <div className="container heroSlider">
-          {heroSlides.map((slide) => (
-            <a className="heroCard" href={slide.href} key={slide.title}>
-              <img className="heroImage" src={slide.image} alt={slide.title} />
-              <div className="heroOverlay" />
-              <div className="heroContent">
-                <p className="label">яркая витрина</p>
-                <h1>{slide.title}</h1>
-                <p>{slide.text}</p>
-                <div className="heroActions">
-                  <span className="primaryBtn heroBtn">Смотреть товары</span>
-                  <span className="secondaryBtn">Акции недели</span>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
+      <HeroSlider slides={heroSlides} />
 
       <section className="stories">
         <div className="container storyRail">
@@ -71,10 +55,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="sale">
-        <div className="container bannerGrid">
+      <section className="section fullBannerSection" id="sale">
+        <div className="bannerGrid bannerGridFull">
           <a className="promoBanner" href="#gifts">
-            <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=1200&q=80" alt="Подарки" />
+            <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=1600&q=80" alt="Подарки" />
             <div className="promoContent">
               <p className="label">подборка</p>
               <h3>Подарки с выгодой</h3>
@@ -82,7 +66,7 @@ export default function HomePage() {
             </div>
           </a>
           <a className="promoBanner promoBannerBright" href="#home">
-            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80" alt="Дом" />
+            <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=80" alt="Дом" />
             <div className="promoContent">
               <p className="label">дом и уют</p>
               <h3>Товары для дома</h3>
@@ -126,7 +110,7 @@ export default function HomePage() {
               <p className="label">бренды</p>
               <h2 className="sectionTitle">Витрины брендов</h2>
             </div>
-            <a className="category" href="/kaskada/brands/">Все бренды</a>
+            <a className="category" href="/kaskada/brands/"><HiOutlineBuildingStorefront />Все бренды</a>
           </div>
           <div className="brandGrid">
             {brands.map((brand) => <BrandCard brand={brand} key={brand.id} />)}
@@ -178,7 +162,7 @@ export default function HomePage() {
 
 function ProductCard({ product }: { product: Product }) {
   return (
-    <article className="productCard">
+    <article className="productCard compactCard">
       <a className="productImage" href={`/kaskada/products/${product.id}/`}>
         <img src={product.image} alt={product.name} />
         <span className="badge">{product.badge}</span>
@@ -192,8 +176,8 @@ function ProductCard({ product }: { product: Product }) {
           <p className="oldPrice">{product.oldPrice}</p>
         </div>
         <div className="quickActions">
-          <button className="likeBtn" type="button">♡</button>
-          <button className="buyBtn" type="button">В корзину</button>
+          <button className="likeBtn" type="button" aria-label="В избранное"><HiHeart /></button>
+          <button className="buyBtn" type="button"><HiOutlineShoppingBag />В корзину</button>
         </div>
       </div>
     </article>
