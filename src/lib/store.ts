@@ -13,7 +13,9 @@ export const stories = [
   { title: 'Чай', image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=300&q=80' },
   { title: 'Детям', image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=300&q=80' },
   { title: 'Питомцы', image: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=300&q=80' },
-  { title: 'Скидки', image: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=300&q=80' }
+  { title: 'Скидки', image: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=300&q=80' },
+  { title: 'Спа', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=300&q=80' },
+  { title: 'Кухня', image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=300&q=80' }
 ];
 
 export const categories = ['Все', 'Новинки', 'Акции', 'Дом', 'Уход', 'Уют', 'Подарки', 'Чай', 'Детям', 'Питомцам'];
@@ -36,7 +38,32 @@ export const products = [
   { id: 'planner-home', name: 'Планер домашних дел', brand: 'Бумажное Настроение', category: 'Подарки', price: '690 ₽', oldPrice: '890 ₽', badge: 'Новинка', rating: '4.7', image: 'https://images.unsplash.com/photo-1517971071642-34a2d3ecc9cd?auto=format&fit=crop&w=900&q=80', description: 'Планер для дома, задач, покупок и уютной организации недели.' },
   { id: 'body-oil', name: 'Масло для тела Нежное тело', brand: 'Натура Лаб', category: 'Уход', price: '1 490 ₽', oldPrice: '1 890 ₽', badge: 'Акция', rating: '4.7', image: 'https://images.unsplash.com/photo-1612817288484-6f916006741a?auto=format&fit=crop&w=900&q=80', description: 'Питательное масло с мягким ароматом для ежедневного ухода.' },
   { id: 'kids-towel', name: 'Детское полотенце Облачко', brand: 'Мамин Выбор', category: 'Детям', price: '1 190 ₽', oldPrice: '1 490 ₽', badge: 'Детям', rating: '4.8', image: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=80', description: 'Мягкое полотенце для ребёнка в спокойном домашнем стиле.' },
-  { id: 'pet-balm', name: 'Бальзам Забота о лапках', brand: 'Лапки Дома', category: 'Питомцам', price: '790 ₽', oldPrice: '990 ₽', badge: 'Сезон', rating: '4.9', image: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=900&q=80', description: 'Защитный бальзам для лап после прогулок, соли и холода.' }
+  { id: 'pet-balm', name: 'Бальзам Забота о лапках', brand: 'Лапки Дома', category: 'Питомцам', price: '790 ₽', oldPrice: '990 ₽', badge: 'Сезон', rating: '4.9', image: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=900&q=80', description: 'Защитный бальзам для лап после прогулок, соли и холода.' },
+  { id: 'face-cream-milk', name: 'Крем для лица Молочное сияние', brand: 'Аурум Скин', category: 'Уход', price: '1 390 ₽', oldPrice: '1 790 ₽', badge: 'Новинка', rating: '4.8', image: 'https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=900&q=80', description: 'Лёгкий дневной крем для мягкости и ровного ощущения кожи.' },
+  { id: 'hair-mask-honey', name: 'Маска для волос Медовый блеск', brand: 'Натура Лаб', category: 'Уход', price: '1 090 ₽', oldPrice: '1 390 ₽', badge: 'Хит', rating: '4.7', image: 'https://images.unsplash.com/photo-1522338242992-e1a54906a8da?auto=format&fit=crop&w=900&q=80', description: 'Питательная маска для домашнего ухода за волосами.' },
+  { id: 'lip-balm-berry', name: 'Бальзам для губ Лесная ягода', brand: 'Северная Лаборатория', category: 'Уход', price: '390 ₽', oldPrice: '490 ₽', badge: 'Каждый день', rating: '4.9', image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=80', description: 'Компактный бальзам для губ на каждый день.' },
+  { id: 'clean-tablets', name: 'Таблетки для уборки Лимон', brand: 'Чистый Дом', category: 'Дом', price: '590 ₽', oldPrice: '790 ₽', badge: 'Акция', rating: '4.6', image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?auto=format&fit=crop&w=900&q=80', description: 'Компактный формат для регулярной уборки кухни и ванной.' },
+  { id: 'dish-soap', name: 'Средство для посуды Нежная пена', brand: 'Чистый Дом', category: 'Дом', price: '490 ₽', oldPrice: '650 ₽', badge: 'Дом', rating: '4.7', image: 'https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=80', description: 'Повседневное средство для кухни с приятным ароматом.' },
+  { id: 'linen-basket', name: 'Корзина для белья Natural', brand: 'Домашний Текстиль', category: 'Дом', price: '1 890 ₽', oldPrice: '2 290 ₽', badge: 'Дом', rating: '4.8', image: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?auto=format&fit=crop&w=900&q=80', description: 'Практичная корзина для аккуратного хранения дома.' },
+  { id: 'wood-tray', name: 'Деревянный поднос Завтрак', brand: 'Глина и Дом', category: 'Уют', price: '1 590 ₽', oldPrice: '1 990 ₽', badge: 'Ручная работа', rating: '4.8', image: 'https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=900&q=80', description: 'Поднос для завтраков, сервировки и красивых домашних фото.' },
+  { id: 'aroma-diffuser', name: 'Диффузор Тёплый кашемир', brand: 'Дом Ароматов', category: 'Уют', price: '1 790 ₽', oldPrice: '2 190 ₽', badge: 'Хит', rating: '4.9', image: 'https://images.unsplash.com/photo-1617832357756-0529fa5b7f92?auto=format&fit=crop&w=900&q=80', description: 'Аромат для гостиной, спальни и уютной атмосферы.' },
+  { id: 'plaid-soft', name: 'Плед Soft Home', brand: 'Домашний Текстиль', category: 'Уют', price: '2 490 ₽', oldPrice: '2 990 ₽', badge: 'Сезон', rating: '4.9', image: 'https://images.unsplash.com/photo-1540638349517-3abd5afc5847?auto=format&fit=crop&w=900&q=80', description: 'Мягкий плед для дивана, спальни и прохладных вечеров.' },
+  { id: 'gift-tea-box', name: 'Чайный подарочный набор', brand: 'Подарки Рядом', category: 'Подарки', price: '1 990 ₽', oldPrice: '2 490 ₽', badge: 'Подарок', rating: '4.8', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=900&q=80', description: 'Набор чаёв и уютных мелочей для красивого подарка.' },
+  { id: 'gift-spa-box', name: 'Спа-набор Вечер для себя', brand: 'Домашний Спа', category: 'Подарки', price: '2 790 ₽', oldPrice: '3 390 ₽', badge: 'Подарок', rating: '4.9', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80', description: 'Готовый спа-набор для ванны, ухода и расслабления.' },
+  { id: 'gift-candle-card', name: 'Свеча и открытка Спасибо', brand: 'Подарки Рядом', category: 'Подарки', price: '1 190 ₽', oldPrice: '1 490 ₽', badge: 'Подарок', rating: '4.7', image: 'https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=900&q=80', description: 'Небольшой, но красивый подарок для благодарности.' },
+  { id: 'green-tea-mint', name: 'Зелёный чай с мятой', brand: 'Травы Севера', category: 'Чай', price: '590 ₽', oldPrice: '690 ₽', badge: 'Каждый день', rating: '4.6', image: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=900&q=80', description: 'Освежающий зелёный чай для ежедневного ритуала.' },
+  { id: 'berry-tea', name: 'Ягодный чай Северная ягода', brand: 'Травы Севера', category: 'Чай', price: '790 ₽', oldPrice: '990 ₽', badge: 'Новинка', rating: '4.8', image: 'https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?auto=format&fit=crop&w=900&q=80', description: 'Ароматный ягодный чай для вечера и подарочных наборов.' },
+  { id: 'coffee-drip', name: 'Дрип-кофе Утренний сет', brand: 'Обжарочная', category: 'Чай', price: '890 ₽', oldPrice: '1 090 ₽', badge: 'Хит', rating: '4.8', image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80', description: 'Удобный формат кофе для дома, офиса и поездок.' },
+  { id: 'kids-soap', name: 'Детское мыло Нежная пенка', brand: 'Мамин Выбор', category: 'Детям', price: '390 ₽', oldPrice: '490 ₽', badge: 'Детям', rating: '4.7', image: 'https://images.unsplash.com/photo-1515488764276-beab7607c1e6?auto=format&fit=crop&w=900&q=80', description: 'Мягкое мыло для ежедневного ухода.' },
+  { id: 'kids-cream', name: 'Детский крем После купания', brand: 'Мамин Выбор', category: 'Детям', price: '690 ₽', oldPrice: '890 ₽', badge: 'Детям', rating: '4.8', image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=80', description: 'Крем для мягкого ухода после купания.' },
+  { id: 'kids-blanket', name: 'Детский плед Сонное облако', brand: 'Домашний Текстиль', category: 'Детям', price: '1 690 ₽', oldPrice: '2 090 ₽', badge: 'Сезон', rating: '4.9', image: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&fit=crop&w=900&q=80', description: 'Мягкий плед для детской комнаты и прогулок.' },
+  { id: 'pet-bowl', name: 'Миска для питомца Stone', brand: 'Лапки Дома', category: 'Питомцам', price: '990 ₽', oldPrice: '1 290 ₽', badge: 'Питомцам', rating: '4.7', image: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=900&q=80', description: 'Стильная миска для корма или воды.' },
+  { id: 'pet-toy', name: 'Игрушка Канат для собак', brand: 'Лапки Дома', category: 'Питомцам', price: '490 ₽', oldPrice: '690 ₽', badge: 'Хит', rating: '4.6', image: 'https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?auto=format&fit=crop&w=900&q=80', description: 'Прочная игрушка для активных прогулок и домашних игр.' },
+  { id: 'pet-blanket', name: 'Плед для питомца Мягкое место', brand: 'Лапки Дома', category: 'Питомцам', price: '1 290 ₽', oldPrice: '1 590 ₽', badge: 'Сезон', rating: '4.8', image: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=900&q=80', description: 'Мягкий плед для лежанки, дивана и поездок.' },
+  { id: 'notebook-goals', name: 'Блокнот Цели и планы', brand: 'Бумажное Настроение', category: 'Подарки', price: '590 ₽', oldPrice: '790 ₽', badge: 'Новинка', rating: '4.7', image: 'https://images.unsplash.com/photo-1517971071642-34a2d3ecc9cd?auto=format&fit=crop&w=900&q=80', description: 'Блокнот для задач, идей и красивого планирования.' },
+  { id: 'room-sachet', name: 'Аромасаше Чистый шкаф', brand: 'Дом Ароматов', category: 'Уют', price: '390 ₽', oldPrice: '490 ₽', badge: 'Каждый день', rating: '4.6', image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=80', description: 'Компактный аромат для шкафа, гардероба и комода.' },
+  { id: 'spa-brush', name: 'Щётка для сухого массажа', brand: 'Домашний Спа', category: 'Уход', price: '890 ₽', oldPrice: '1 190 ₽', badge: 'Хит', rating: '4.8', image: 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=900&q=80', description: 'Аксессуар для домашнего ухода и спа-ритуала.' },
+  { id: 'kitchen-cloth-set', name: 'Набор салфеток для кухни', brand: 'Домашний Текстиль', category: 'Дом', price: '690 ₽', oldPrice: '890 ₽', badge: 'Акция', rating: '4.7', image: 'https://images.unsplash.com/photo-1603204077779-bed963ea7d0e?auto=format&fit=crop&w=900&q=80', description: 'Практичный набор для кухни, уборки и сервировки.' }
 ];
 
 export const brands = [
@@ -45,14 +72,20 @@ export const brands = [
   { id: 'warm-workshop', name: 'Мастерская Тепла', category: 'Уют', text: 'Свечи, ароматы и уютные предметы для дома.', image: 'https://images.unsplash.com/photo-1602874801007-bd458bb1b8b6?auto=format&fit=crop&w=1200&q=80' },
   { id: 'north-herbs', name: 'Травы Севера', category: 'Чай', text: 'Травяные сборы и чайные ритуалы каждый день.', image: 'https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=1200&q=80' },
   { id: 'gifts-near', name: 'Подарки Рядом', category: 'Подарки', text: 'Готовые подарочные наборы от локальных мастеров.', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=1200&q=80' },
-  { id: 'paws-home', name: 'Лапки Дома', category: 'Питомцам', text: 'Уходовые товары для домашних животных.', image: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80' }
+  { id: 'paws-home', name: 'Лапки Дома', category: 'Питомцам', text: 'Уходовые товары для домашних животных.', image: 'https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=1200&q=80' },
+  { id: 'home-spa', name: 'Домашний Спа', category: 'Уход', text: 'Спа-ритуалы, соль, аксессуары и подарочные наборы.', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=80' },
+  { id: 'paper-mood', name: 'Бумажное Настроение', category: 'Подарки', text: 'Планеры, блокноты и бумажные товары для красивой организации.', image: 'https://images.unsplash.com/photo-1517971071642-34a2d3ecc9cd?auto=format&fit=crop&w=1200&q=80' },
+  { id: 'mom-choice', name: 'Мамин Выбор', category: 'Детям', text: 'Мягкий уход и уютные товары для детей.', image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=1200&q=80' },
+  { id: 'aroma-home', name: 'Дом Ароматов', category: 'Уют', text: 'Ароматы для дома, диффузоры и интерьерное настроение.', image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1200&q=80' }
 ];
 
 export const videos = [
   { title: 'Распаковка набора для ухода', brand: 'Аурум Скин', duration: '1:24', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80' },
   { title: 'Обзор товаров для дома', brand: 'Чистый Дом', duration: '2:08', image: 'https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?auto=format&fit=crop&w=900&q=80' },
   { title: 'Подарочный набор крупным планом', brand: 'Подарки Рядом', duration: '0:56', image: 'https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=900&q=80' },
-  { title: 'Как выглядит свеча в интерьере', brand: 'Мастерская Тепла', duration: '1:42', image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=80' }
+  { title: 'Как выглядит свеча в интерьере', brand: 'Мастерская Тепла', duration: '1:42', image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=80' },
+  { title: 'Спа-набор для вечера', brand: 'Домашний Спа', duration: '1:18', image: 'https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=900&q=80' },
+  { title: 'Питомцы: уход после прогулки', brand: 'Лапки Дома', duration: '1:03', image: 'https://images.unsplash.com/photo-1601758124510-52d02ddb7cbd?auto=format&fit=crop&w=900&q=80' }
 ];
 
 export const collections = [
@@ -61,5 +94,8 @@ export const collections = [
   { title: 'Для дома', subtitle: 'Чистота, аромат и уют', filter: 'Дом' },
   { title: 'Подарки', subtitle: 'Готовые идеи для красивого повода', filter: 'Подарок' },
   { title: 'Для ухода', subtitle: 'Косметика и домашние ритуалы', filter: 'Уход' },
-  { title: 'Для питомцев', subtitle: 'Уход за домашними животными', filter: 'Питомцам' }
+  { title: 'Для питомцев', subtitle: 'Уход за домашними животными', filter: 'Питомцам' },
+  { title: 'Детям', subtitle: 'Мягкий уход и уютные товары', filter: 'Детям' },
+  { title: 'Чай и кофе', subtitle: 'Напитки для дома, офиса и подарков', filter: 'Чай' },
+  { title: 'Уютный дом', subtitle: 'Свечи, ароматы, текстиль и керамика', filter: 'Уют' }
 ];
