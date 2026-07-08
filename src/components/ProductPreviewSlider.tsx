@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import type { MouseEvent } from 'react';
 import { HiChevronLeft, HiChevronRight } from 'react-icons/hi2';
 
 const categoryImages: Record<string, string[]> = {
@@ -50,13 +51,13 @@ export function ProductPreviewSlider({ href, image, title, category, badge, gall
     return Array.from(new Set([image, ...(gallery ?? []), ...fallback])).slice(0, 4);
   }, [category, gallery, image]);
 
-  function next(event: React.MouseEvent<HTMLButtonElement>) {
+  function next(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     event.stopPropagation();
     setActive((current) => (current + 1) % slides.length);
   }
 
-  function prev(event: React.MouseEvent<HTMLButtonElement>) {
+  function prev(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     event.stopPropagation();
     setActive((current) => (current - 1 + slides.length) % slides.length);
