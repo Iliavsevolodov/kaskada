@@ -6,14 +6,15 @@ import { ProductSearch } from '@/components/ProductSearch';
 import { StoryViewer } from '@/components/StoryViewer';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { getAlgorithmShelves, rankProducts, type RankedProduct } from '@/lib/algorithms';
-import { brands, categories, collections, heroSlides, products, stories, videos } from '@/lib/store';
+import { marketProducts } from '@/lib/catalog';
+import { brands, categories, collections, heroSlides, stories, videos } from '@/lib/store';
 
-type Product = (typeof products)[number];
+type Product = (typeof marketProducts)[number];
 type Brand = (typeof brands)[number];
 type ProductLike = Product | RankedProduct;
 
 const algorithmShelves = getAlgorithmShelves();
-const topProducts = rankProducts(products, 'popular', 8);
+const topProducts = rankProducts(marketProducts, 'popular', 8);
 
 function getShelfLayout(index: number) {
   return ['craftShelfEditorial', 'craftShelfGallery', 'craftShelfCompact', 'craftShelfMagazine'][index % 4];
@@ -83,7 +84,7 @@ export default function HomePage() {
             <p>Каждый товар получает рейтинг по кликам, корзинам, заказам, скидке, новизне, отзывам и качеству продавца. Новинки получают шанс, хиты растут, слабые товары опускаются ниже.</p>
           </div>
           <div className="algorithmStatsGrid craftStatsGrid">
-            <div><span>{products.length}</span><p>товаров в ранжировании</p></div>
+            <div><span>{marketProducts.length}</span><p>товаров в ранжировании</p></div>
             <div><span>10</span><p>сигналов показа</p></div>
             <div><span>{algorithmShelves.length}</span><p>авто-подборки</p></div>
             <div><span>24/7</span><p>логика витрины</p></div>
@@ -235,7 +236,7 @@ export default function HomePage() {
       <SectionDivider eyebrow="ручные полки" title="Товарные сценарии" text="Горизонтальные полки остаются как витрины внутри маркетплейса: новинки, акции, подарки, уход, дом и питомцы." />
 
       {collections.map((collection, shelfIndex) => {
-        const list = products.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
+        const list = marketProducts.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
         return (
           <section className={`section compactSection craftShelfSection ${getShelfLayout(shelfIndex + 2)}`} id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : collection.title === 'Для ухода' ? 'beauty' : undefined} key={collection.title}>
             <div className="container">
@@ -304,7 +305,7 @@ function ProductCard({ product, featured, layout }: { product: ProductLike; feat
 
   return (
     <article className={cardClass}>
-      <ProductPreviewSlider href={`/kaskada/products/${product.id}/`} image={product.image} title={product.name} category={product.category} badge={badge} />
+      <ProductPreviewSlider href={`/kaskada/products/${product.id}/`} image={product.image} title={product.name} category={product.category} badge={badge} gallery={product.gallery} />
       <div className="productBody">
         <a href={`/kaskada/products/${product.id}/`}><h3 className="productName">{product.name}</h3></a>
         <div className="productMeta"><span>{product.brand}</span><span>★ {product.rating}</span></div>
