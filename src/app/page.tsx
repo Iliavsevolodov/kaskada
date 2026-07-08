@@ -2,6 +2,7 @@ import { HiBolt, HiFire, HiHeart, HiHome, HiMagnifyingGlass, HiOutlineBuildingSt
 import { HeroSlider } from '@/components/HeroSlider';
 import { ProductSearch } from '@/components/ProductSearch';
 import { StoryViewer } from '@/components/StoryViewer';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { brands, categories, collections, heroSlides, products, stories, videos } from '@/lib/store';
 
 type Product = (typeof products)[number];
@@ -27,7 +28,10 @@ export default function HomePage() {
             <a href="#videos">Обзоры</a>
             <a href="#brands">Бренды</a>
           </nav>
-          <a className="cartBtn" href="#cart"><HiOutlineShoppingBag />Корзина</a>
+          <div className="headerActions">
+            <ThemeToggle />
+            <a className="cartBtn" href="#cart"><HiOutlineShoppingBag />Корзина</a>
+          </div>
         </div>
       </header>
 
