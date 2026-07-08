@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { HiHeart, HiMagnifyingGlass, HiOutlineShoppingBag, HiXMark } from 'react-icons/hi2';
 import { products } from '@/lib/store';
 
 type Product = (typeof products)[number];
@@ -21,7 +22,11 @@ export function ProductSearch() {
   return (
     <div className="smartSearch">
       <div className="searchBox searchBoxStrong">
-        <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Найти товар, бренд или категорию" />
+        <div className="searchInputWrap">
+          <HiMagnifyingGlass className="searchIcon" />
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Найти товар, бренд или категорию" />
+          {query ? <button className="clearSearch" onClick={() => setQuery('')} type="button" aria-label="Очистить поиск"><HiXMark /></button> : null}
+        </div>
         <div className="searchHints">
           {['Все', 'Новинка', 'Акция', 'Дом', 'Уход', 'Подарок', 'Чай', 'Питомцам'].map((item) => (
             <button className={filter === item ? 'hintActive' : ''} key={item} onClick={() => setFilter(item)} type="button">{item}</button>
@@ -32,7 +37,7 @@ export function ProductSearch() {
         <p>{items.length} товаров найдено</p>
         {(query || filter !== 'Все') ? <button onClick={() => { setQuery(''); setFilter('Все'); }} type="button">Сбросить</button> : null}
       </div>
-      <div className="productGrid">
+      <div className="productGrid compactGrid">
         {items.map((product) => <SearchProductCard product={product} key={product.id} />)}
       </div>
     </div>
@@ -41,7 +46,7 @@ export function ProductSearch() {
 
 function SearchProductCard({ product }: { product: Product }) {
   return (
-    <article className="productCard">
+    <article className="productCard compactCard">
       <a className="productImage" href={`/kaskada/products/${product.id}/`}>
         <img src={product.image} alt={product.name} />
         <span className="badge">{product.badge}</span>
@@ -55,8 +60,8 @@ function SearchProductCard({ product }: { product: Product }) {
           <p className="oldPrice">{product.oldPrice}</p>
         </div>
         <div className="quickActions">
-          <button className="likeBtn" type="button">♡</button>
-          <button className="buyBtn" type="button">В корзину</button>
+          <button className="likeBtn" type="button" aria-label="В избранное"><HiHeart /></button>
+          <button className="buyBtn" type="button"><HiOutlineShoppingBag />В корзину</button>
         </div>
       </div>
     </article>
