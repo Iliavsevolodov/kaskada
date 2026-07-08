@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import './polish.css';
 
 export const metadata: Metadata = {
   title: 'Каскада Маркет',
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#fbf3e7'
+  themeColor: '#ffffff'
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
