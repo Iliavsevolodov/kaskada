@@ -1,6 +1,7 @@
-import { HiHeart, HiOutlineBuildingStorefront, HiOutlineShoppingBag } from 'react-icons/hi2';
+import { HiHeart, HiHome, HiMagnifyingGlass, HiOutlineBuildingStorefront, HiOutlineShoppingBag, HiUserCircle } from 'react-icons/hi2';
 import { HeroSlider } from '@/components/HeroSlider';
 import { ProductSearch } from '@/components/ProductSearch';
+import { StoryViewer } from '@/components/StoryViewer';
 import { brands, categories, collections, heroSlides, products, stories, videos } from '@/lib/store';
 
 type Product = (typeof products)[number];
@@ -31,17 +32,12 @@ export default function HomePage() {
       <HeroSlider slides={heroSlides} />
 
       <section className="stories">
-        <div className="container storyRail">
-          {stories.map((story) => (
-            <a className="story" href="#catalog" key={story.title}>
-              <span className="storyRing"><span><img src={story.image} alt={story.title} /></span></span>
-              <span className="storyTitle">{story.title}</span>
-            </a>
-          ))}
+        <div className="container">
+          <StoryViewer stories={stories} />
         </div>
       </section>
 
-      <section className="section" id="catalog">
+      <section className="section compactSection" id="catalog">
         <div className="container">
           <div className="sectionHead">
             <div>
@@ -76,20 +72,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="products">
+      <section className="section compactSection" id="products">
         <div className="container">
           <div className="sectionHead">
             <div>
               <p className="label">товары</p>
               <h2 className="sectionTitle">Найди и добавь в корзину</h2>
-              <p className="sectionText">Поиск работает по названию, бренду, категории, описанию и бейджам.</p>
+              <p className="sectionText">Компактная витрина с поиском, фильтрами, рейтингом и быстрыми действиями.</p>
             </div>
           </div>
           <ProductSearch />
         </div>
       </section>
 
-      <section className="section" id="videos">
+      <section className="section compactSection" id="videos">
         <div className="container">
           <div className="sectionHead">
             <div>
@@ -103,7 +99,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="brands">
+      <section className="section compactSection" id="brands">
         <div className="container">
           <div className="sectionHead">
             <div>
@@ -121,7 +117,7 @@ export default function HomePage() {
       {collections.map((collection) => {
         const list = products.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
         return (
-          <section className="section" id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : collection.title === 'Для ухода' ? 'beauty' : undefined} key={collection.title}>
+          <section className="section compactSection" id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : collection.title === 'Для ухода' ? 'beauty' : undefined} key={collection.title}>
             <div className="container">
               <div className="sectionHead">
                 <div>
@@ -138,7 +134,7 @@ export default function HomePage() {
         );
       })}
 
-      <section className="section" id="cart">
+      <section className="section compactSection" id="cart">
         <div className="container">
           <div className="darkBox">
             <p className="label">корзина</p>
@@ -150,10 +146,10 @@ export default function HomePage() {
 
       <nav className="bottomNav">
         <div className="bottomNavInner">
-          <a href="/kaskada/">Главная</a>
-          <a href="#catalog">Каталог</a>
-          <a href="#products">Товары</a>
-          <a href="#cart">Корзина</a>
+          <a href="/kaskada/"><HiHome /><span>Главная</span></a>
+          <a href="#products"><HiMagnifyingGlass /><span>Поиск</span></a>
+          <a href="#cart"><HiOutlineShoppingBag /><span>Корзина</span></a>
+          <a href="#profile"><HiUserCircle /><span>Кабинет</span></a>
         </div>
       </nav>
     </main>
@@ -168,9 +164,8 @@ function ProductCard({ product }: { product: Product }) {
         <span className="badge">{product.badge}</span>
       </a>
       <div className="productBody">
-        <p className="productCategory">{product.category}</p>
         <a href={`/kaskada/products/${product.id}/`}><h3 className="productName">{product.name}</h3></a>
-        <p className="productBrand">{product.brand}</p>
+        <div className="productMeta"><span>{product.brand}</span><span>★ {product.rating}</span></div>
         <div className="priceRow">
           <p className="price">{product.price}</p>
           <p className="oldPrice">{product.oldPrice}</p>
