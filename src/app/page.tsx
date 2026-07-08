@@ -15,6 +15,21 @@ type ProductLike = Product | RankedProduct;
 const algorithmShelves = getAlgorithmShelves();
 const topProducts = rankProducts(products, 'popular', 8);
 
+function getShelfLayout(index: number) {
+  return ['craftShelfEditorial', 'craftShelfGallery', 'craftShelfCompact', 'craftShelfMagazine'][index % 4];
+}
+
+function getCardLayout(index: number, shelfIndex = 0) {
+  const layouts = [
+    ['craftCardHero', 'craftCardMini', 'craftCardWide', 'craftCardClean', 'craftCardTall', 'craftCardMini', 'craftCardClean', 'craftCardWide'],
+    ['craftCardWide', 'craftCardHero', 'craftCardMini', 'craftCardClean', 'craftCardMini', 'craftCardTall', 'craftCardClean', 'craftCardMini'],
+    ['craftCardMini', 'craftCardClean', 'craftCardMini', 'craftCardWide', 'craftCardMini', 'craftCardClean', 'craftCardMini', 'craftCardTall'],
+    ['craftCardTall', 'craftCardMini', 'craftCardHero', 'craftCardClean', 'craftCardWide', 'craftCardMini', 'craftCardClean', 'craftCardMini']
+  ];
+
+  return layouts[Math.abs(shelfIndex) % layouts.length][index % 8];
+}
+
 export default function HomePage() {
   return (
     <main className="page">
@@ -62,12 +77,12 @@ export default function HomePage() {
 
       <section className="section algorithmHero" id="algorithm">
         <div className="container algorithmHeroGrid">
-          <div className="algorithmHeroCard">
+          <div className="algorithmHeroCard craftPanel">
             <p className="label"><HiChartBar /> алгоритмы без ИИ</p>
             <h2>Показы управляются баллами, а не случайностью</h2>
             <p>Каждый товар получает рейтинг по кликам, корзинам, заказам, скидке, новизне, отзывам и качеству продавца. Новинки получают шанс, хиты растут, слабые товары опускаются ниже.</p>
           </div>
-          <div className="algorithmStatsGrid">
+          <div className="algorithmStatsGrid craftStatsGrid">
             <div><span>{products.length}</span><p>товаров в ранжировании</p></div>
             <div><span>10</span><p>сигналов показа</p></div>
             <div><span>{algorithmShelves.length}</span><p>авто-подборки</p></div>
@@ -87,25 +102,25 @@ export default function HomePage() {
             </div>
             <a className="sectionLink" href="#products">Открыть каталог</a>
           </div>
-          <div className="categoryRail premiumCategoryRail">
+          <div className="categoryRail premiumCategoryRail craftCategoryRail">
             {categories.map((category) => <a className="category" href="#products" key={category}><HiSparkles />{category}</a>)}
           </div>
         </div>
       </section>
 
-      <section className="section dealSection">
-        <div className="container dealGrid">
-          <a className="dealCard dealHot" href="#products">
+      <section className="section dealSection craftDealSection">
+        <div className="container dealGrid craftDealGrid">
+          <a className="dealCard dealHot craftDealHero" href="#products">
             <p><HiFire /> горячее</p>
             <h3>Товары, которые забирают сегодня</h3>
             <span>Смотреть подборку</span>
           </a>
-          <a className="dealCard" href="#brands">
+          <a className="dealCard craftDealSoft" href="#brands">
             <p><HiOutlineBuildingStorefront /> бренды</p>
             <h3>Локальные витрины с характером</h3>
             <span>Перейти к брендам</span>
           </a>
-          <a className="dealCard" href="#algorithm">
+          <a className="dealCard craftDealPaper" href="#algorithm">
             <p><HiChartBar /> алгоритм</p>
             <h3>Продвижение по понятным правилам</h3>
             <span>Смотреть логику</span>
@@ -114,8 +129,8 @@ export default function HomePage() {
       </section>
 
       <section className="section fullBannerSection" id="sale">
-        <div className="bannerGrid bannerGridFull">
-          <a className="promoBanner" href="#gifts">
+        <div className="bannerGrid bannerGridFull craftBannerGrid">
+          <a className="promoBanner craftPromoPrimary" href="#gifts">
             <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=1600&q=80" alt="Подарки" />
             <div className="promoContent">
               <p className="label">подборка</p>
@@ -123,7 +138,7 @@ export default function HomePage() {
               <p>Наборы, уход и уютные мелочи для красивого повода.</p>
             </div>
           </a>
-          <a className="promoBanner promoBannerBright" href="#home">
+          <a className="promoBanner promoBannerBright craftPromoSecondary" href="#home">
             <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=80" alt="Дом" />
             <div className="promoContent">
               <p className="label">дом и уют</p>
@@ -149,9 +164,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section compactSection">
+      <section className="section compactSection craftShelfSection craftTopShelf">
         <div className="container">
-          <div className="sectionHead">
+          <div className="sectionHead craftShelfHead">
             <div>
               <p className="label">топ алгоритма</p>
               <h2 className="sectionTitle">Лучшие позиции выдачи</h2>
@@ -159,18 +174,18 @@ export default function HomePage() {
             </div>
             <a className="sectionLink" href="#products">В каталог</a>
           </div>
-          <div className="productRail algorithmRail">
-            {topProducts.map((product, index) => <ProductCard product={product} featured={index === 0} key={`top-${product.id}`} />)}
+          <div className="productRail algorithmRail craftRail craftShelfEditorial">
+            {topProducts.map((product, index) => <ProductCard product={product} featured={index === 0} layout={getCardLayout(index, 0)} key={`top-${product.id}`} />)}
           </div>
         </div>
       </section>
 
       <SectionDivider eyebrow="авто-подборки" title="Блоки собираются сами" text="Популярное, новинки, выгодные товары и высокий рейтинг — это не ручная витрина, а сортировка по правилам." />
 
-      {algorithmShelves.map((shelf) => (
-        <section className="section compactSection algorithmShelf" id={shelf.id} key={shelf.id}>
+      {algorithmShelves.map((shelf, shelfIndex) => (
+        <section className={`section compactSection algorithmShelf craftShelfSection ${getShelfLayout(shelfIndex)}`} id={shelf.id} key={shelf.id}>
           <div className="container">
-            <div className="sectionHead">
+            <div className="sectionHead craftShelfHead">
               <div>
                 <p className="label">{shelf.eyebrow}</p>
                 <h2 className="sectionTitle">{shelf.title}</h2>
@@ -178,8 +193,8 @@ export default function HomePage() {
               </div>
               <a className="sectionLink" href="#products">Все товары</a>
             </div>
-            <div className="productRail algorithmRail">
-              {shelf.products.map((product, index) => <ProductCard product={product} featured={index === 0} key={`${shelf.id}-${product.id}`} />)}
+            <div className={`productRail algorithmRail craftRail ${getShelfLayout(shelfIndex)}`}>
+              {shelf.products.map((product, index) => <ProductCard product={product} featured={index === 0} layout={getCardLayout(index, shelfIndex)} key={`${shelf.id}-${product.id}`} />)}
             </div>
           </div>
         </section>
@@ -187,31 +202,31 @@ export default function HomePage() {
 
       <SectionDivider eyebrow="контент" title="Обзоры и бренды" text="Видео, распаковки и брендовые витрины помогают покупателю быстрее доверять товару." />
 
-      <section className="section compactSection" id="videos">
+      <section className="section compactSection craftMediaSection" id="videos">
         <div className="container">
-          <div className="sectionHead">
+          <div className="sectionHead craftShelfHead">
             <div>
               <p className="label">видео</p>
               <h2 className="sectionTitle">Распаковки и обзоры</h2>
             </div>
             <a className="sectionLink" href="#products">К товарам</a>
           </div>
-          <div className="videoGrid videoRailMobile">
+          <div className="videoGrid videoRailMobile craftVideoGrid">
             {videos.map((video) => <VideoCard video={video} key={video.title} />)}
           </div>
         </div>
       </section>
 
-      <section className="section compactSection" id="brands">
+      <section className="section compactSection craftBrandSection" id="brands">
         <div className="container">
-          <div className="sectionHead">
+          <div className="sectionHead craftShelfHead">
             <div>
               <p className="label">бренды</p>
               <h2 className="sectionTitle">Витрины брендов</h2>
             </div>
             <a className="category" href="/kaskada/brands/"><HiOutlineBuildingStorefront />Все бренды</a>
           </div>
-          <div className="brandGrid brandRailMobile">
+          <div className="brandGrid brandRailMobile craftBrandGrid">
             {brands.map((brand) => <BrandCard brand={brand} key={brand.id} />)}
           </div>
         </div>
@@ -219,12 +234,12 @@ export default function HomePage() {
 
       <SectionDivider eyebrow="ручные полки" title="Товарные сценарии" text="Горизонтальные полки остаются как витрины внутри маркетплейса: новинки, акции, подарки, уход, дом и питомцы." />
 
-      {collections.map((collection) => {
+      {collections.map((collection, shelfIndex) => {
         const list = products.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
         return (
-          <section className="section compactSection" id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : collection.title === 'Для ухода' ? 'beauty' : undefined} key={collection.title}>
+          <section className={`section compactSection craftShelfSection ${getShelfLayout(shelfIndex + 2)}`} id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : collection.title === 'Для ухода' ? 'beauty' : undefined} key={collection.title}>
             <div className="container">
-              <div className="sectionHead">
+              <div className="sectionHead craftShelfHead">
                 <div>
                   <p className="label">подборка</p>
                   <h2 className="sectionTitle">{collection.title}</h2>
@@ -232,8 +247,8 @@ export default function HomePage() {
                 </div>
                 <a className="sectionLink" href="#products">Все товары</a>
               </div>
-              <div className="productRail">
-                {list.map((product, index) => <ProductCard product={product} featured={index === 0} key={`${collection.title}-${product.id}`} />)}
+              <div className={`productRail craftRail ${getShelfLayout(shelfIndex + 2)}`}>
+                {list.map((product, index) => <ProductCard product={product} featured={index === 0} layout={getCardLayout(index, shelfIndex + 2)} key={`${collection.title}-${product.id}`} />)}
               </div>
             </div>
           </section>
@@ -242,7 +257,7 @@ export default function HomePage() {
 
       <section className="section compactSection" id="cart">
         <div className="container">
-          <div className="cartPreview">
+          <div className="cartPreview craftCartPreview">
             <div>
               <p className="label">следующий модуль</p>
               <h2 className="sectionTitle">Корзина и оформление заказа</h2>
@@ -267,7 +282,7 @@ export default function HomePage() {
 
 function SectionDivider({ eyebrow, title, text, strong }: { eyebrow: string; title: string; text: string; strong?: boolean }) {
   return (
-    <div className={strong ? 'sectionDivider strongDivider' : 'sectionDivider'}>
+    <div className={strong ? 'sectionDivider strongDivider craftDivider' : 'sectionDivider craftDivider'}>
       <div className="container dividerInner">
         <div className="dividerLine" />
         <div className="dividerContent">
@@ -281,13 +296,14 @@ function SectionDivider({ eyebrow, title, text, strong }: { eyebrow: string; tit
   );
 }
 
-function ProductCard({ product, featured }: { product: ProductLike; featured?: boolean }) {
+function ProductCard({ product, featured, layout }: { product: ProductLike; featured?: boolean; layout?: string }) {
   const badge = 'promotionLabel' in product ? product.promotionLabel : product.badge;
   const algorithmReason = 'algorithmReason' in product ? product.algorithmReason : null;
   const algorithmScore = 'algorithmScore' in product ? product.algorithmScore : null;
+  const cardClass = ['productCard', featured ? 'railFeaturedCard' : 'compactCard', layout].filter(Boolean).join(' ');
 
   return (
-    <article className={featured ? 'productCard railFeaturedCard' : 'productCard compactCard'}>
+    <article className={cardClass}>
       <ProductPreviewSlider href={`/kaskada/products/${product.id}/`} image={product.image} title={product.name} category={product.category} badge={badge} />
       <div className="productBody">
         <a href={`/kaskada/products/${product.id}/`}><h3 className="productName">{product.name}</h3></a>
