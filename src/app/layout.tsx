@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import './polish.css';
 import './features.css';
+import './craft.css';
 
 export const metadata: Metadata = {
   title: 'Каскада Маркет',
