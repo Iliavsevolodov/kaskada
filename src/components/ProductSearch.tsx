@@ -34,7 +34,7 @@ export function ProductSearch() {
         </div>
       </div>
       <div className="searchMeta">
-        <p>{items.length} товаров найдено</p>
+        <p>{items.length} товаров</p>
         {(query || filter !== 'Все') ? <button onClick={() => { setQuery(''); setFilter('Все'); }} type="button">Сбросить</button> : null}
       </div>
       <div className="productGrid compactGrid">
@@ -52,9 +52,8 @@ function SearchProductCard({ product }: { product: Product }) {
         <span className="badge">{product.badge}</span>
       </a>
       <div className="productBody">
-        <p className="productCategory">{product.category}</p>
         <a href={`/kaskada/products/${product.id}/`}><h3 className="productName">{product.name}</h3></a>
-        <p className="productBrand">{product.brand}</p>
+        <div className="productMeta"><span>{product.brand}</span><span>★ {product.rating}</span></div>
         <div className="priceRow">
           <p className="price">{product.price}</p>
           <p className="oldPrice">{product.oldPrice}</p>
