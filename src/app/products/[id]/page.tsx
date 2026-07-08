@@ -1,12 +1,12 @@
-import { products } from '@/lib/store';
+import { marketProducts } from '@/lib/catalog';
 
 export function generateStaticParams() {
-  return products.map((product) => ({ id: product.id }));
+  return marketProducts.map((product) => ({ id: product.id }));
 }
 
 export default function ProductPage({ params }: { params: { id: string } }) {
-  const product = products.find((item) => item.id === params.id) ?? products[0];
-  const related = products.filter((item) => item.id !== product.id && item.category === product.category).slice(0, 4);
+  const product = marketProducts.find((item) => item.id === params.id) ?? marketProducts[0];
+  const related = marketProducts.filter((item) => item.id !== product.id && item.category === product.category).slice(0, 4);
 
   return (
     <main className="page">
@@ -53,7 +53,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
             </div>
           </div>
           <div className="productGrid">
-            {(related.length ? related : products.slice(0, 4)).map((item) => <SmallProduct product={item} key={item.id} />)}
+            {(related.length ? related : marketProducts.slice(0, 4)).map((item) => <SmallProduct product={item} key={item.id} />)}
           </div>
         </div>
       </section>
@@ -61,7 +61,7 @@ export default function ProductPage({ params }: { params: { id: string } }) {
   );
 }
 
-function SmallProduct({ product }: { product: (typeof products)[number] }) {
+function SmallProduct({ product }: { product: (typeof marketProducts)[number] }) {
   return (
     <a className="productCard" href={`/kaskada/products/${product.id}/`}>
       <div className="productImage">
