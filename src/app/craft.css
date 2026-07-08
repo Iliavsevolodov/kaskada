@@ -1,0 +1,450 @@
+/* Handcrafted premium marketplace layer */
+:root {
+  --craft-paper: #fffaf1;
+  --craft-cream: #f7efe4;
+  --craft-ink: #19120d;
+  --craft-clay: #b56c4a;
+  --craft-sage: #6f8063;
+  --craft-line: rgba(88, 64, 42, .16);
+  --craft-radius: 28px;
+}
+
+html[data-theme='dark'] {
+  --craft-paper: #14131a;
+  --craft-cream: #1b1a24;
+  --craft-ink: #f6efe5;
+  --craft-clay: #d9916c;
+  --craft-sage: #a8bc98;
+  --craft-line: rgba(255, 238, 214, .13);
+}
+
+.page {
+  background:
+    radial-gradient(circle at 10% 0%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 28%),
+    radial-gradient(circle at 90% 5%, color-mix(in srgb, var(--gold) 13%, transparent), transparent 30%),
+    linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--craft-cream) 38%, var(--bg)) 520px, var(--bg));
+}
+
+.header {
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+}
+
+.logoMark {
+  transform: rotate(-3deg);
+}
+
+.craftPanel,
+.craftDealHero,
+.craftCartPreview,
+.craftPromoPrimary,
+.strongDivider .dividerContent {
+  position: relative;
+  overflow: hidden;
+}
+
+.craftPanel::before,
+.craftDealHero::before,
+.craftCartPreview::before,
+.craftPromoPrimary::before,
+.strongDivider .dividerContent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,.04) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity: .38;
+}
+
+.craftCategoryRail .category {
+  border-color: var(--craft-line);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--craft-paper) 80%, var(--surface)), var(--surface));
+  box-shadow: 0 10px 24px rgba(87, 59, 34, .055);
+}
+
+.craftDealGrid {
+  grid-template-columns: 1.45fr .95fr .95fr;
+}
+
+.craftDealHero {
+  min-height: 190px;
+  background:
+    radial-gradient(circle at 78% 10%, rgba(255, 211, 77, .35), transparent 34%),
+    linear-gradient(135deg, #1a120c, #4a2417 58%, #1a120c);
+}
+
+.craftDealSoft {
+  background:
+    radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--accent-2) 18%, transparent), transparent 38%),
+    linear-gradient(135deg, var(--craft-paper), var(--surface));
+}
+
+.craftDealPaper {
+  background:
+    radial-gradient(circle at 85% 12%, color-mix(in srgb, var(--gold) 18%, transparent), transparent 36%),
+    linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--craft-cream) 82%, var(--surface)));
+}
+
+.craftBannerGrid {
+  gap: 12px;
+  width: min(1180px, calc(100% - 20px));
+  margin: 0 auto;
+}
+
+.craftBannerGrid .promoBanner {
+  border: 1px solid var(--craft-line);
+  border-radius: 32px;
+}
+
+.craftPromoPrimary::after {
+  background: linear-gradient(90deg, rgba(31, 16, 9, .86), rgba(181, 108, 74, .34), transparent);
+}
+
+.craftPromoSecondary::after {
+  background: linear-gradient(90deg, rgba(42, 65, 43, .78), rgba(255, 79, 64, .22), transparent);
+}
+
+.craftDivider .dividerContent {
+  border-color: var(--craft-line);
+  background:
+    radial-gradient(circle at 88% 0%, color-mix(in srgb, var(--gold) 12%, transparent), transparent 38%),
+    linear-gradient(135deg, var(--craft-paper), var(--surface));
+}
+
+.craftDivider .dividerLine {
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--craft-clay) 34%, var(--line)), transparent);
+}
+
+.craftShelfSection {
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.craftShelfHead {
+  border: 1px solid var(--craft-line);
+  border-radius: 28px;
+  background:
+    radial-gradient(circle at 96% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 30%),
+    linear-gradient(135deg, color-mix(in srgb, var(--craft-paper) 86%, var(--surface)), var(--surface));
+  padding: 18px;
+  box-shadow: 0 12px 34px rgba(77, 50, 28, .055);
+}
+
+.craftRail {
+  display: grid;
+  overflow: visible;
+  gap: 14px;
+  padding-bottom: 0;
+}
+
+.craftShelfEditorial.craftRail {
+  grid-template-columns: 1.36fr .82fr .82fr 1fr;
+  grid-auto-rows: minmax(236px, auto);
+}
+
+.craftShelfGallery.craftRail {
+  grid-template-columns: 1fr 1fr 1.35fr;
+  grid-auto-rows: minmax(210px, auto);
+}
+
+.craftShelfCompact.craftRail {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-auto-rows: auto;
+}
+
+.craftShelfMagazine.craftRail {
+  grid-template-columns: .92fr 1.38fr .92fr .92fr;
+  grid-auto-rows: minmax(220px, auto);
+}
+
+.craftRail .productCard {
+  width: auto;
+  min-width: 0;
+  flex: initial;
+  border-color: var(--craft-line);
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--surface) 96%, var(--craft-paper)), var(--surface));
+}
+
+.craftCardHero {
+  grid-column: span 2;
+  grid-row: span 2;
+  background:
+    radial-gradient(circle at 90% 8%, color-mix(in srgb, var(--gold) 20%, transparent), transparent 35%),
+    linear-gradient(180deg, color-mix(in srgb, var(--craft-paper) 74%, var(--surface)), var(--surface));
+}
+
+.craftCardHero .productImage {
+  aspect-ratio: 1.18 / 1;
+}
+
+.craftCardHero .productName {
+  font-size: 22px;
+  min-height: 58px;
+  line-height: 1.08;
+  letter-spacing: -.035em;
+}
+
+.craftCardHero .price {
+  font-size: 27px;
+}
+
+.craftCardWide {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 48% minmax(0, 1fr);
+}
+
+.craftCardWide .productImage {
+  height: auto;
+  min-height: calc(100% - 16px);
+  aspect-ratio: auto;
+  margin: 8px 0 8px 8px;
+  border-radius: 22px 12px 12px 22px;
+}
+
+.craftCardWide .productBody {
+  justify-content: center;
+}
+
+.craftCardWide .productName {
+  min-height: auto;
+  font-size: 18px;
+}
+
+.craftCardTall {
+  grid-row: span 2;
+  background:
+    linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--accent-2) 8%, var(--surface)));
+}
+
+.craftCardTall .productImage {
+  aspect-ratio: .74 / 1;
+}
+
+.craftCardMini .productImage {
+  aspect-ratio: 1 / .92;
+}
+
+.craftCardMini .productName {
+  font-size: 13px;
+}
+
+.craftCardClean {
+  background: var(--surface);
+}
+
+.craftCardClean .badge {
+  background: color-mix(in srgb, var(--surface) 86%, white);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+.craftCardClean .algorithmTag {
+  background: transparent;
+}
+
+.craftTopShelf .craftCardHero {
+  background:
+    radial-gradient(circle at 86% 4%, color-mix(in srgb, var(--gold) 30%, transparent), transparent 34%),
+    linear-gradient(135deg, #1b120c, #5a2e1c 58%, #21140d);
+  color: #fff;
+}
+
+.craftTopShelf .craftCardHero .productMeta,
+.craftTopShelf .craftCardHero .oldPrice,
+.craftTopShelf .craftCardHero .algorithmTag span {
+  color: rgba(255,255,255,.74);
+}
+
+.craftTopShelf .craftCardHero .likeBtn {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  border-color: rgba(255,255,255,.25);
+}
+
+.craftMediaSection .videoGrid {
+  grid-template-columns: 1.2fr .85fr .85fr 1.1fr;
+}
+
+.craftMediaSection .videoCard:first-child,
+.craftMediaSection .videoCard:last-child {
+  min-height: 320px;
+}
+
+.craftMediaSection .videoCard:first-child img,
+.craftMediaSection .videoCard:last-child img {
+  height: 228px;
+}
+
+.craftBrandGrid {
+  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+}
+
+.craftBrandGrid .brandCard:first-child {
+  grid-row: span 2;
+}
+
+.craftBrandGrid .brandCard:first-child img {
+  height: 330px;
+}
+
+.craftBrandGrid .brandCard:nth-child(4) {
+  grid-column: span 2;
+}
+
+.craftBrandGrid .brandCard:nth-child(4) img {
+  height: 210px;
+}
+
+.craftCartPreview {
+  background:
+    radial-gradient(circle at 86% 8%, rgba(255, 211, 77, .22), transparent 36%),
+    linear-gradient(135deg, #17100c, #342115 54%, #15100e);
+}
+
+html[data-theme='dark'] .craftShelfHead,
+html[data-theme='dark'] .craftDivider .dividerContent,
+html[data-theme='dark'] .craftRail .productCard,
+html[data-theme='dark'] .craftDealSoft,
+html[data-theme='dark'] .craftDealPaper {
+  background:
+    radial-gradient(circle at 92% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 36%),
+    linear-gradient(135deg, var(--surface), var(--soft));
+}
+
+@media (max-width: 1100px) {
+  .craftShelfEditorial.craftRail,
+  .craftShelfGallery.craftRail,
+  .craftShelfMagazine.craftRail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .craftShelfCompact.craftRail {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .craftMediaSection .videoGrid,
+  .craftBrandGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .craftDealGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .craftShelfEditorial.craftRail,
+  .craftShelfGallery.craftRail,
+  .craftShelfCompact.craftRail,
+  .craftShelfMagazine.craftRail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .craftCardHero,
+  .craftCardWide {
+    grid-column: span 2;
+  }
+
+  .craftCardTall {
+    grid-row: span 1;
+  }
+
+  .craftMediaSection .videoGrid,
+  .craftBrandGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .craftBannerGrid {
+    width: 100vw;
+    gap: 0;
+  }
+
+  .craftBannerGrid .promoBanner {
+    border-radius: 0;
+  }
+
+  .craftShelfSection {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .craftShelfHead {
+    border-radius: 22px;
+    padding: 14px;
+  }
+
+  .craftRail {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: inline mandatory;
+    padding-bottom: 8px;
+  }
+
+  .craftRail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .craftRail .productCard {
+    flex: 0 0 166px;
+    scroll-snap-align: start;
+  }
+
+  .craftRail .craftCardHero {
+    flex-basis: 238px;
+  }
+
+  .craftRail .craftCardWide {
+    flex-basis: 248px;
+    display: flex;
+  }
+
+  .craftCardWide .productImage {
+    min-height: 0;
+    aspect-ratio: 1 / 1;
+    margin: 7px 7px 0;
+    border-radius: var(--radius-sm) var(--radius-sm) var(--radius-xs) var(--radius-xs);
+  }
+
+  .craftCardHero .productName {
+    font-size: 17px;
+    min-height: 44px;
+  }
+
+  .craftCardHero .price {
+    font-size: 19px;
+  }
+
+  .craftCardTall .productImage {
+    aspect-ratio: 1 / 1;
+  }
+
+  .craftMediaSection .videoGrid,
+  .craftBrandGrid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: inline mandatory;
+  }
+
+  .craftMediaSection .videoCard,
+  .craftBrandGrid .brandCard,
+  .craftMediaSection .videoCard:first-child,
+  .craftMediaSection .videoCard:last-child {
+    flex: 0 0 186px;
+    min-height: auto;
+  }
+
+  .craftMediaSection .videoCard:first-child img,
+  .craftMediaSection .videoCard:last-child img,
+  .craftBrandGrid .brandCard:first-child img,
+  .craftBrandGrid .brandCard:nth-child(4) img {
+    height: 132px;
+  }
+}
