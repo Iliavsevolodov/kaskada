@@ -1,23 +1,7 @@
-const categories = ['Все', 'Новинки', 'Акции', 'Дом', 'Уход', 'Подарки', 'Чай', 'Детям'];
+import { brands, categories, collections, heroSlides, products, stories, videos } from '@/lib/store';
 
-const products = [
-  { name: 'Крем для рук Северное сияние', brand: 'Северная Лаборатория', category: 'Уход', price: '890 ₽', oldPrice: '1 190 ₽', badge: 'Новинка', image: 'https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?auto=format&fit=crop&w=900&q=80' },
-  { name: 'Набор для безопасной уборки', brand: 'Чистый Дом', category: 'Дом', price: '2 490 ₽', oldPrice: '2 990 ₽', badge: 'Акция', image: 'https://images.unsplash.com/photo-1585421514284-efb74c2b69ba?auto=format&fit=crop&w=900&q=80' },
-  { name: 'Свеча Таёжный вечер', brand: 'Мастерская Тепла', category: 'Уют', price: '1 290 ₽', oldPrice: '1 590 ₽', badge: 'Хит', image: 'https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=900&q=80' },
-  { name: 'Травяной чай Баланс', brand: 'Травы Севера', category: 'Чай', price: '690 ₽', oldPrice: '790 ₽', badge: 'Каждый день', image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=900&q=80' },
-  { name: 'Подарочный набор Любовь рядом', brand: 'Подарки Рядом', category: 'Подарки', price: '3 490 ₽', oldPrice: '4 290 ₽', badge: 'Подарок', image: 'https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=900&q=80' },
-  { name: 'Сыворотка Сияние', brand: 'Аурум Скин', category: 'Уход', price: '1 790 ₽', oldPrice: '2 290 ₽', badge: 'Новинка', image: 'https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?auto=format&fit=crop&w=900&q=80' },
-  { name: 'Аромаспрей для дома Лён', brand: 'Дом Ароматов', category: 'Уют', price: '990 ₽', oldPrice: '1 290 ₽', badge: 'Дом', image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=80' },
-  { name: 'Детский защитный бальзам', brand: 'Мамин Выбор', category: 'Детям', price: '690 ₽', oldPrice: '890 ₽', badge: 'Детям', image: 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?auto=format&fit=crop&w=900&q=80' }
-];
-
-const stories = [
-  { title: 'Новинки', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=300&q=80' },
-  { title: 'Дом', image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=300&q=80' },
-  { title: 'Уход', image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=300&q=80' },
-  { title: 'Подарки', image: 'https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=300&q=80' },
-  { title: 'Чай', image: 'https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=300&q=80' }
-];
+type Product = (typeof products)[number];
+type Brand = (typeof brands)[number];
 
 export default function HomePage() {
   return (
@@ -33,7 +17,8 @@ export default function HomePage() {
           </a>
           <nav className="nav">
             <a href="#catalog">Каталог</a>
-            <a href="#sale">Акции</a>
+            <a href="#products">Товары</a>
+            <a href="#videos">Обзоры</a>
             <a href="#brands">Бренды</a>
           </nav>
           <a className="cartBtn" href="#cart">Корзина</a>
@@ -41,20 +26,22 @@ export default function HomePage() {
       </header>
 
       <section className="hero">
-        <div className="container">
-          <div className="heroCard">
-            <img className="heroImage" src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=1600&q=80" alt="Витрина магазина" />
-            <div className="heroOverlay" />
-            <div className="heroContent">
-              <p className="label">тёплый онлайн-магазин</p>
-              <h1>Покупки у локальных брендов в одном месте</h1>
-              <p>Уход, дом, уют, подарки, чай и товары для семьи. Простая витрина, понятные категории и быстрые покупки.</p>
-              <div className="heroActions">
-                <a className="primaryBtn heroBtn" href="#catalog">Смотреть товары</a>
-                <a className="secondaryBtn" href="#sale">Акции недели</a>
+        <div className="container heroSlider">
+          {heroSlides.map((slide) => (
+            <a className="heroCard" href={slide.href} key={slide.title}>
+              <img className="heroImage" src={slide.image} alt={slide.title} />
+              <div className="heroOverlay" />
+              <div className="heroContent">
+                <p className="label">тёплая витрина</p>
+                <h1>{slide.title}</h1>
+                <p>{slide.text}</p>
+                <div className="heroActions">
+                  <span className="primaryBtn heroBtn">Смотреть товары</span>
+                  <span className="secondaryBtn">Акции недели</span>
+                </div>
               </div>
-            </div>
-          </div>
+            </a>
+          ))}
         </div>
       </section>
 
@@ -69,10 +56,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="searchBlock">
+      <section className="searchBlock" id="search">
         <div className="container">
           <div className="searchBox">
-            <input placeholder="Найти товар или бренд" />
+            <input placeholder="Найти товар, бренд или категорию" />
+            <div className="searchHints">
+              {['крем', 'дом', 'подарок', 'чай', 'свеча', 'детям'].map((item) => <a href="#products" key={item}>{item}</a>)}
+            </div>
           </div>
         </div>
       </section>
@@ -93,7 +83,7 @@ export default function HomePage() {
 
       <section className="section" id="sale">
         <div className="container bannerGrid">
-          <a className="promoBanner" href="#products">
+          <a className="promoBanner" href="#gifts">
             <img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?auto=format&fit=crop&w=1200&q=80" alt="Подарки" />
             <div className="promoContent">
               <p className="label">подборка</p>
@@ -101,7 +91,7 @@ export default function HomePage() {
               <p>Наборы, уход и уютные мелочи для красивого повода.</p>
             </div>
           </a>
-          <a className="promoBanner" href="#products">
+          <a className="promoBanner" href="#home">
             <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80" alt="Дом" />
             <div className="promoContent">
               <p className="label">дом и уют</p>
@@ -122,27 +112,66 @@ export default function HomePage() {
             <a className="category" href="#catalog">Все категории</a>
           </div>
           <div className="productGrid">
-            {products.map((product) => <ProductCard product={product} key={product.name} />)}
+            {products.slice(0, 8).map((product) => <ProductCard product={product} key={product.id} />)}
+          </div>
+        </div>
+      </section>
+
+      <section className="section" id="videos">
+        <div className="container">
+          <div className="sectionHead">
+            <div>
+              <p className="label">видео</p>
+              <h2 className="sectionTitle">Распаковки и обзоры</h2>
+            </div>
+          </div>
+          <div className="videoGrid">
+            {videos.map((video) => <VideoCard video={video} key={video.title} />)}
           </div>
         </div>
       </section>
 
       <section className="section" id="brands">
         <div className="container">
-          <div className="infoBox">
-            <p className="label">бренды</p>
-            <h2 className="sectionTitle">Бренды появятся отдельным разделом</h2>
-            <p>Следующим шагом добавим страницы брендов, отзывы, витрины и фильтры. Сейчас главная задача — стабильный покупательский магазин.</p>
+          <div className="sectionHead">
+            <div>
+              <p className="label">бренды</p>
+              <h2 className="sectionTitle">Витрины брендов</h2>
+            </div>
+            <a className="category" href="/kaskada/brands/">Все бренды</a>
+          </div>
+          <div className="brandGrid">
+            {brands.map((brand) => <BrandCard brand={brand} key={brand.id} />)}
           </div>
         </div>
       </section>
+
+      {collections.map((collection) => {
+        const list = products.filter((product) => product.badge === collection.filter || product.category === collection.filter).slice(0, 6);
+        return (
+          <section className="section" id={collection.title === 'Для дома' ? 'home' : collection.title === 'Подарки' ? 'gifts' : undefined} key={collection.title}>
+            <div className="container">
+              <div className="sectionHead">
+                <div>
+                  <p className="label">подборка</p>
+                  <h2 className="sectionTitle">{collection.title}</h2>
+                  <p className="sectionText">{collection.subtitle}</p>
+                </div>
+              </div>
+              <div className="productRail">
+                {list.map((product) => <ProductCard product={product} key={`${collection.title}-${product.id}`} />)}
+              </div>
+            </div>
+          </section>
+        );
+      })}
 
       <section className="section" id="cart">
         <div className="container">
           <div className="darkBox">
             <p className="label">корзина</p>
             <h2 className="sectionTitle">Корзина будет следующим модулем</h2>
-            <p>Сейчас кнопки товаров уже готовы. Далее подключим количество, итоговую сумму и оформление заказа.</p>
+            <p>Кнопки товаров готовы. Далее подключим количество, итоговую сумму и оформление заказа.</p>
           </div>
         </div>
       </section>
@@ -159,16 +188,16 @@ export default function HomePage() {
   );
 }
 
-function ProductCard({ product }: { product: { name: string; brand: string; category: string; price: string; oldPrice: string; badge: string; image: string } }) {
+function ProductCard({ product }: { product: Product }) {
   return (
     <article className="productCard">
-      <div className="productImage">
+      <a className="productImage" href={`/kaskada/products/${product.id}/`}>
         <img src={product.image} alt={product.name} />
         <span className="badge">{product.badge}</span>
-      </div>
+      </a>
       <div className="productBody">
         <p className="productCategory">{product.category}</p>
-        <h3 className="productName">{product.name}</h3>
+        <a href={`/kaskada/products/${product.id}/`}><h3 className="productName">{product.name}</h3></a>
         <p className="productBrand">{product.brand}</p>
         <div className="priceRow">
           <p className="price">{product.price}</p>
@@ -178,6 +207,33 @@ function ProductCard({ product }: { product: { name: string; brand: string; cate
           <button className="likeBtn" type="button">♡</button>
           <button className="buyBtn" type="button">В корзину</button>
         </div>
+      </div>
+    </article>
+  );
+}
+
+function BrandCard({ brand }: { brand: Brand }) {
+  return (
+    <a className="brandCard" href={`/kaskada/brands/${brand.id}/`}>
+      <img src={brand.image} alt={brand.name} />
+      <div>
+        <p className="label">{brand.category}</p>
+        <h3>{brand.name}</h3>
+        <p>{brand.text}</p>
+      </div>
+    </a>
+  );
+}
+
+function VideoCard({ video }: { video: (typeof videos)[number] }) {
+  return (
+    <article className="videoCard">
+      <img src={video.image} alt={video.title} />
+      <span className="playButton">▶</span>
+      <span className="duration">{video.duration}</span>
+      <div className="videoBody">
+        <p>{video.brand}</p>
+        <h3>{video.title}</h3>
       </div>
     </article>
   );
